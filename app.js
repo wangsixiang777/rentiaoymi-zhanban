@@ -6,6 +6,7 @@ const intro=materials.find(x=>x.name.startsWith("8个项目简介"));
 const entities=["元谋果然好","楚雄云果","元谋果然好","云南华派","云南衡金","滇中有色","云南钛业","云南铁峰"];
 const groups=[0,0,0,1,1,2,2,2];
 const categories=["现代农业","医药与环保","工业与矿冶"];
+const entryCategories=["高原特色农业","生物医药","有色金属"];
 const photoSelections=[[20],[5,18,24,25],[20],[0,9],[1,19],[12,6,7,8],[10,2,32,40],[3]];
 const projectSources = [
   { images: [11,20], documents: [21] },
@@ -106,7 +107,7 @@ function renderViewer(){
 }
 function openViewer(items,index){viewerItems=items;viewerIndex=index;renderViewer();byId("photo").showModal();}
 function setZoom(value){zoom=Math.max(1,Math.min(3,value));byId("large-photo").style.width=(zoom*100)+"%";byId("zoom-out").disabled=zoom===1;byId("zoom-in").disabled=zoom===3;}
-byId("entries").innerHTML=projects.map(([title],i)=>'<button data-project="'+i+'"><img src="'+images[i]+'" alt=""><span class="entry-number">'+num(i)+'</span><div><p>'+categories[groups[i]]+'</p><h2>'+title+'</h2><span>查看展板 ↗</span></div></button>').join("");
+byId("entries").innerHTML=projects.map(([title],i)=>'<button data-project="'+i+'"><img src="'+images[i]+'" alt=""><span class="entry-number">'+num(i)+'</span><div><p>'+entryCategories[groups[i]]+'</p><h2>'+title+'</h2><span>查看展板 ↗</span></div></button>').join("");
 document.addEventListener("click",event=>{
   const entry=event.target.closest("[data-project]");if(entry){showProject(Number(entry.dataset.project));return;}
   const image=event.target.closest("[data-photo]");
